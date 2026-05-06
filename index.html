@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ご来場ガイド | BEAUTY COLLECTION 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #e8c547;
+    --dark-gold: #c9a227;
+    --deep-gold: #8a6800;
+    --navy: #0d1117;
+    --navy-mid: #1a1a2e;
+    --navy-light: #2d2200;
+    --brown: #4a3800;
+    --white: #ffffff;
+    --cream: #fffbf0;
+    --gray: #aaaaaa;
+    --light-gray: #cccccc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ヘッダー */
+  .header {
+    position: relative;
+    text-align: center;
+    padding: 60px 20px 50px;
+    background: linear-gradient(180deg, #0a0a15 0%, var(--navy) 100%);
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(232,197,71,0.12) 0%, transparent 70%);
+  }
+  .header-line {
+    width: 60px; height: 1px;
+    background: var(--gold);
+    margin: 0 auto 20px;
+    animation: expandLine 1s ease forwards;
+  }
+  @keyframes expandLine {
+    from { width: 0; }
+    to { width: 60px; }
+  }
+  .header-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 8vw, 52px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+  .header-desc {
+    font-size: 15px;
+    color: var(--gray);
+    margin-top: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* コンテナ */
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* セクション共通 */
+  .section {
+    margin-bottom: 16px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ステップカード */
+  .step-card {
+    background: linear-gradient(135deg, var(--navy-light), var(--brown));
+    border: 1px solid rgba(232,197,71,0.3);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+  }
+  .step-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 24px 20px;
+    border-bottom: 1px solid rgba(232,197,71,0.15);
+  }
+  .step-num {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--navy-light);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-title-wrap {}
+  .step-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .step-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .step-body {
+    padding: 20px 24px 24px;
+  }
+  .step-desc {
+    font-size: 15px;
+    color: var(--light-gray);
+    line-height: 1.9;
+    margin-bottom: 16px;
+  }
+
+  /* 矢印 */
+  .arrow-down {
+    text-align: center;
+    padding: 8px 0;
+    color: var(--gold);
+    font-size: 20px;
+    opacity: 0.6;
+  }
+
+  /* スマホ画面モックアップ */
+  .phone-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0 8px;
+  }
+  .phone {
+    width: 160px;
+    background: #0a0a15;
+    border-radius: 24px;
+    padding: 10px 8px;
+    box-shadow: 0 0 0 1px rgba(232,197,71,0.4), 0 20px 60px rgba(0,0,0,0.6);
+    position: relative;
+  }
+  .phone-notch {
+    width: 40px; height: 8px;
+    background: #0a0a15;
+    border-radius: 0 0 6px 6px;
+    margin: 0 auto 6px;
+  }
+  .phone-screen {
+    background: var(--navy-mid);
+    border-radius: 16px;
+    overflow: hidden;
+    min-height: 220px;
+  }
+
+  /* 入場証画面 */
+  .ticket-screen {
+    background: linear-gradient(135deg, #2d2200, #4a3800);
+    padding: 14px 12px;
+    text-align: center;
+    min-height: 220px;
+    position: relative;
+  }
+  .ticket-screen::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px solid rgba(232,197,71,0.5);
+    border-radius: 12px;
+    pointer-events: none;
+  }
+  .ticket-invite {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .ticket-event {
+    font-size: 8px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+  .ticket-divider {
+    width: 24px; height: 1px;
+    background: var(--gold);
+    margin: 0 auto 10px;
+  }
+  .ticket-label { font-size: 6px; color: #888; letter-spacing: 1px; margin-bottom: 2px; }
+  .ticket-salon { font-size: 8px; color: var(--gold); font-weight: 700; margin-bottom: 8px; }
+  .ticket-name { font-size: 13px; color: var(--white); font-weight: 700; margin-bottom: 2px; }
+  .ticket-sama { font-size: 7px; color: #888; margin-bottom: 10px; }
+  .ticket-badge {
+    background: var(--gold);
+    color: #3d3000;
+    font-size: 7px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .ticket-note { font-size: 6px; color: #888; margin-bottom: 8px; }
+  .ticket-btn {
+    background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+    color: #3d3000;
+    font-size: 7px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: inline-block;
+  }
+
+  /* マップ画面 */
+  .map-screen {
+    background: #0d1117;
+    min-height: 220px;
+    padding: 0;
+  }
+  .map-header {
+    background: linear-gradient(135deg, #2d2200, #4a3800);
+    padding: 8px;
+    text-align: center;
+    font-size: 7px;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .map-body { padding: 8px; }
+  .map-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+  .map-booth {
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 5px 2px;
+    text-align: center;
+    font-size: 6px;
+    color: #666;
+    font-weight: 700;
+  }
+  .map-booth.visited {
+    background: #2d1e00;
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .map-booth.visited::before { content: '✓ '; }
+  .map-legend {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    font-size: 6px;
+    color: #666;
+    margin-top: 4px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 3px; }
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 2px;
+    border: 1px solid #333;
+  }
+  .legend-dot.gold { border-color: var(--gold); background: #2d1e00; }
+
+  /* ハイライトボックス */
+  .highlight-box {
+    background: rgba(232,197,71,0.08);
+    border: 1px solid rgba(232,197,71,0.25);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 12px;
+  }
+  .highlight-box .hb-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .highlight-box .hb-text {
+    font-size: 14px;
+    color: var(--light-gray);
+    line-height: 1.8;
+  }
+
+  /* 警告ボックス */
+  .warn-box {
+    background: rgba(230,100,30,0.1);
+    border: 1px solid rgba(230,100,30,0.3);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 12px;
+  }
+  .warn-box .wb-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #e67e22;
+    margin-bottom: 8px;
+  }
+  .warn-box .wb-text {
+    font-size: 14px;
+    color: var(--light-gray);
+    line-height: 1.8;
+  }
+
+  /* フロー概要バー */
+  .flow-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    background: linear-gradient(135deg, #1a1200, #2d2000);
+    border: 1px solid rgba(232,197,71,0.3);
+    border-radius: 50px;
+    padding: 14px 20px;
+    margin-bottom: 32px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+  .flow-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .flow-icon {
+    font-size: 24px;
+  }
+  .flow-text {
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 700;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+  .flow-arrow {
+    color: rgba(232,197,71,0.4);
+    font-size: 18px;
+    padding: 0 8px;
+    flex-shrink: 0;
+    margin-bottom: 16px;
+  }
+
+  /* セクションタイトル */
+  .section-label {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 24px;
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before, .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(232,197,71,0.4));
+  }
+  .section-label::after {
+    background: linear-gradient(90deg, rgba(232,197,71,0.4), transparent);
+  }
+
+  /* フッター */
+  .footer {
+    text-align: center;
+    padding: 32px 20px;
+    border-top: 1px solid rgba(232,197,71,0.15);
+    color: #555;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  /* トラブル */
+  .trouble-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 480px) {
+    .trouble-grid { grid-template-columns: 1fr; }
+    .flow-bar { justify-content: flex-start; padding: 14px 16px; }
+  }
+
+  .trouble-item {
+    background: linear-gradient(135deg, #1a0d00, #2a1800);
+    border: 1px solid rgba(232,197,71,0.2);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .trouble-q {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  .trouble-a {
+    font-size: 13px;
+    color: var(--light-gray);
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<div class="header">
+  <div class="header-line"></div>
+  <div class="header-sub">VISITOR GUIDE</div>
+  <h1>BEAUTY COLLECTION<br>2026</h1>
+  <p class="header-desc">ご来場当日の流れをご確認ください<br>2026年5月12日（火）パシフィコ横浜 ノース</p>
+</div>
+
+<div class="container">
+
+  <!-- 全体フロー -->
+  <div class="section-label">FLOW OVERVIEW</div>
+
+  <div class="section">
+    <div class="flow-bar">
+      <div class="flow-item">
+        <div class="flow-icon">📧</div>
+        <div class="flow-text">メールを開く</div>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-item">
+        <div class="flow-icon">📱</div>
+        <div class="flow-text">入場証を表示</div>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-item">
+        <div class="flow-icon">👤</div>
+        <div class="flow-text">受付でご提示</div>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-item">
+        <div class="flow-icon">🗺️</div>
+        <div class="flow-text">マップで回遊</div>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-item">
+        <div class="flow-icon">✅</div>
+        <div class="flow-text">ブースをタップ</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="section-label">STEP BY STEP</div>
+
+  <div class="section">
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">1</div>
+        <div class="step-title-wrap">
+          <div class="step-label">BEFORE YOU ARRIVE</div>
+          <div class="step-title">入場証メールを準備する</div>
+        </div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">お申し込み後に届いた件名「【入場証】〇〇様」のメールをご用意ください。当日このメールから入場証を表示します。</p>
+        <div class="highlight-box">
+          <div class="hb-title">📌 事前にご確認ください</div>
+          <div class="hb-text">
+            ・メールが届いていない場合は迷惑メールフォルダをご確認ください<br>
+            ・当日スマホの充電をお忘れなく<br>
+            ・申し込み時に使ったメールアドレスのスマホをお持ちください
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-down">↓</div>
+
+  <!-- STEP 2 -->
+  <div class="section">
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">2</div>
+        <div class="step-title-wrap">
+          <div class="step-label">AT THE ENTRANCE</div>
+          <div class="step-title">入場証を開いて受付へ</div>
+        </div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">メール内の「<strong style="color:var(--gold)">入場証を開く</strong>」ボタンをタップすると、入場証画面が開きます。この画面を受付スタッフにご提示ください。</p>
+
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="ticket-screen">
+                <div class="ticket-invite">✦ INVITATION ✦</div>
+                <div class="ticket-event">BEAUTY COLLECTION<br>2026</div>
+                <div class="ticket-divider"></div>
+                <div class="ticket-label">SALON</div>
+                <div class="ticket-salon">〇〇ヘアサロン</div>
+                <div class="ticket-label">NAME</div>
+                <div class="ticket-name">山田 花子</div>
+                <div class="ticket-sama">様</div>
+                <div class="ticket-badge">✅ 入場受付済申込者</div>
+                <div class="ticket-note">受付スタッフにご提示ください</div>
+                <div class="ticket-btn">🗺️ ブース回遊マップへ</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <div class="hb-title">💡 受付スタッフの対応</div>
+          <div class="hb-text">スタッフが画面を目視で確認します。QRのスキャン等は不要です。スムーズに入場いただけます。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-down">↓</div>
+
+  <!-- STEP 3 -->
+  <div class="section">
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">3</div>
+        <div class="step-title-wrap">
+          <div class="step-label">INSIDE THE VENUE</div>
+          <div class="step-title">マップでブースを回遊する</div>
+        </div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">入場証画面下部の「<strong style="color:var(--gold)">ブース回遊マップへ</strong>」ボタンをタップするとマップ画面に移動します。会場内のブースを自由に回りましょう。</p>
+
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="map-screen">
+                <div class="map-header">🗺️ BEAUTY COLLECTION 2026 ブース回遊マップ</div>
+                <div class="map-body">
+                  <div class="map-grid">
+                    <div class="map-booth visited">Aブース</div>
+                    <div class="map-booth">Bブース</div>
+                    <div class="map-booth visited">Cブース</div>
+                    <div class="map-booth">Dブース</div>
+                    <div class="map-booth visited">Eブース</div>
+                    <div class="map-booth">Fブース</div>
+                    <div class="map-booth">Gブース</div>
+                    <div class="map-booth">Hブース</div>
+                    <div class="map-booth">Iブース</div>
+                  </div>
+                  <div class="map-legend">
+                    <div class="legend-item">
+                      <div class="legend-dot gold"></div>
+                      <span style="color:var(--gold)">訪問済み</span>
+                    </div>
+                    <div class="legend-item">
+                      <div class="legend-dot"></div>
+                      <span>未訪問</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <div class="hb-title">✅ ブースのタップ方法</div>
+          <div class="hb-text">
+            訪問したブースをマップ上でタップするだけで訪問ログが自動記録されます。ゴールドで表示されたブースが訪問済みです。何度でもアクセスできます。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- トラブル -->
+  <div class="section-label" style="margin-top:48px;">TROUBLE SHOOTING</div>
+
+  <div class="section">
+    <div class="trouble-grid">
+      <div class="trouble-item">
+        <div class="trouble-q">📧 メールが見つからない</div>
+        <div class="trouble-a">迷惑メールフォルダをご確認ください。それでも見つからない場合は受付スタッフにお申し出ください。</div>
+      </div>
+      <div class="trouble-item">
+        <div class="trouble-q">📱 画面が開かない</div>
+        <div class="trouble-a">メール内のリンクをもう一度タップし直してください。LINEアプリ内ブラウザでは動作しない場合があります。SafariまたはChromeでお試しください。</div>
+      </div>
+      <div class="trouble-item">
+        <div class="trouble-q">🗺️ マップが表示されない</div>
+        <div class="trouble-a">通信環境をご確認ください。Wi-Fiまたはモバイルデータ通信がオンになっているかご確認ください。</div>
+      </div>
+      <div class="trouble-item">
+        <div class="trouble-q">⚡ その他のお困りごと</div>
+        <div class="trouble-a">会場内の受付スタッフまたはインフォメーションデスクまでお気軽にお声がけください。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 注意事項 -->
+  <div class="section" style="margin-top:16px;">
+    <div class="warn-box">
+      <div class="wb-title">⚠️ ご注意</div>
+      <div class="wb-text">
+        ・LINEのカメラや社内アプリ内ブラウザでは正常に動作しない場合があります<br>
+        ・スマホ標準のSafari（iPhone）またはChrome（Android）をご使用ください<br>
+        ・当日は会場Wi-Fiのほか、4G/5G回線でもご利用いただけます
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- フッター -->
+<div class="footer">
+  BEAUTY COLLECTION 2026<br>
+  2026年5月12日（火）10:00〜16:00<br>
+  パシフィコ横浜 ノース<br><br>
+  <span style="color:#333;">GAMO KANAGAWA BRANCH 運営事務局</span>
+</div>
+
+<script>
+  // スクロールアニメーション
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
